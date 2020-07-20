@@ -137,7 +137,7 @@ const main = async () => {
 
   //get all user playlists in an array of playlists
   var listsOfPlaylists = [];
-  let temp = await getUserPlaylists("https://api.spotify.com/v1/users/juliusraphael/playlists");
+  let temp = await getUserPlaylists("https://api.spotify.com/v1/users/radic1/playlists");
   listsOfPlaylists.push(...Object.values(temp)[1]);
 
   while(temp['next'] !== null){
