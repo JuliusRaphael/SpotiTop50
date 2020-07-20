@@ -1,8 +1,7 @@
 //const fetch = require('node-fetch');
 
 //let spotiData = [];
-
-var tag = "BQD1LV8GVY9EzEioruCf63L9WAumbNMYvxGoWtud577HtWRGcJh-JbexHwiX0YNxd1Y41DyBeCxCs9059kFIM4Q3Qmnn3c0oHeQUT82e89sk7GmNwKzQHfEeuwe_viRJQodgnu013PfUuVeRmv_lKHCEwycSfwBKTB8"
+var tag = "BQDx05WnTrW4Ol35aSWPEL10Mcob4cFmGmE6yH4DRv1agAGPvVVIMEvpFIPgr2y0o_v5-k-x4PyWLLMBb5vnX159Lk8cB9nvDsycZzL-l1bwY65cMf7WJXDOyJ7KleZGlVl1-hvl_mbUW95TQiuI7ussyYuYiyknWXs";
 
 async function getUserPlaylists(input){
     const url = input;
@@ -135,6 +134,7 @@ async function getArtist(link) {
 
 const main = async () => {
   console.log("hej");
+
   //get all user playlists in an array of playlists
   var listsOfPlaylists = [];
   let temp = await getUserPlaylists("https://api.spotify.com/v1/users/juliusraphael/playlists");
