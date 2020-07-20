@@ -1,0 +1,229 @@
+//const fetch = require('node-fetch');
+
+//let spotiData = [];
+
+var tag = "BQD1LV8GVY9EzEioruCf63L9WAumbNMYvxGoWtud577HtWRGcJh-JbexHwiX0YNxd1Y41DyBeCxCs9059kFIM4Q3Qmnn3c0oHeQUT82e89sk7GmNwKzQHfEeuwe_viRJQodgnu013PfUuVeRmv_lKHCEwycSfwBKTB8"
+
+async function getUserPlaylists(input){
+    const url = input;
+    const options = {
+      headers: {
+        Authorization: "Bearer ".concat(tag)
+      }
+    };
+
+    const result = fetch(url,options)
+      .then(result => result.json())
+      return result;
+}
+
+async function getPlaylistIdFromUsersPlaylists(item) {
+  var temp = [];
+  item.forEach(async function(it){
+    await temp.push(it['id']);
+  });
+  return temp;
+}
+
+async function getAllTracks(playlists) {
+  var temp = [];
+  await Promise.all(playlists.map(async (playlist) => {
+      var result = await getPlaylistTracks("https://api.spotify.com/v1/playlists/"+playlist+"/tracks");
+      temp.push(...Object.values(result)[1]);
+
+      while(result['next'] !== null){
+        let temp2 = await getPlaylistTracks(result['next']);
+        temp.push(...Object.values(temp2)[1]);
+        result = temp2;
+      }
+  }));
+  return temp;
+}
+
+async function getPlaylistTracks(link) {
+  const url = link;
+  const options = {
+    headers: {
+      Authorization: "Bearer ".concat(tag)
+    }
+  };
+
+  const result = fetch(url,options)
+    .then(result => result.json())
+    return result;
+}
+
+
+async function getAllArtists(tracklist){
+  var map = new Map();
+
+  tracklist.forEach(function(track){
+
+    //get all artists
+    var trackArtists = track['track']['artists'];
+
+    //for all artists
+    trackArtists.forEach(function(artist){
+
+      //if artist is in hashMap add +1 to key
+      if(map.has(artist['id'])){
+        map.set(artist['id'], map.get(artist['id'])+1);
+
+      //else add new artists with value 1
+      }else {
+        map.set(artist['id'], 1);
+      }
+    })
+  })
+  return map;
+}
+
+async function createDataFromMap(map){
+  var ret = [];
+  for (let [id, value] of map) {
+    ret.push({id: id, value: value});
+  }
+
+  ret.sort(function(a,b) {
+    if (a['value'] > b['value']) {
+      return -1;
+    }
+    if (a['value'] < b['value']) {
+      return 1;
+    }
+    return 0;
+  });
+
+  return ret.slice(0,50);
+}
+
+async function getNamesAndImages(ids) {
+  var temp = [];
+  await Promise.all(ids.map(async (id) => {
+
+      var result = await getArtist("https://api.spotify.com/v1/artists/"+id['id']);
+      temp.push({'id': id['id'], 'name': result['name'], 'value': id['value'], 'image': result['images'][0]});
+      //console.log(result);
+  }));
+
+  temp.sort(function(a,b) {
+    if (a['value'] > b['value']) {
+      return -1;
+    }
+    if (a['value'] < b['value']) {
+      return 1;
+    }
+    return 0;
+  });
+  return temp;
+}
+
+async function getArtist(link) {
+  const url = link;
+  const options = {
+    headers: {
+      Authorization: "Bearer ".concat(tag)
+    }
+  };
+
+  const result = fetch(url,options)
+    .then(result => result.json())
+    return result;
+}
+
+
+
+const main = async () => {
+  console.log("hej");
+  //get all user playlists in an array of playlists
+  var listsOfPlaylists = [];
+  let temp = await getUserPlaylists("https://api.spotify.com/v1/users/juliusraphael/playlists");
+  listsOfPlaylists.push(...Object.values(temp)[1]);
+
+  while(temp['next'] !== null){
+    let temp2 = await getUserPlaylists(temp['next']);
+    listsOfPlaylists.push(...Object.values(temp2)[1]);
+    temp = temp2;
+  }
+
+  //get all playlist ids in an array
+  var playlists = await getPlaylistIdFromUsersPlaylists(listsOfPlaylists);
+
+  //for all playlists get all tracks in each playlist
+  var tracks = await getAllTracks(playlists);
+
+  //get all artitst from tracks and put in hashmap
+  var artistsHashmap = await getAllArtists(tracks);
+  //console.log(artistsHashmap);
+
+  var ids = await createDataFromMap(artistsHashmap);
+
+  var data = await getNamesAndImages(ids);
+  console.log(data);
+
+  createChart(data);
+
+  return data;
+};
+
+async function createChart(data){
+  const DATA = data;
+
+  var width = 800;
+  var height = 800;
+
+  var simulation = d3.forceSimulation()
+    .force("x", d3.forceX(width / 2).strength(0.05))
+    .force("y", d3.forceY(height / 2).strength(0.05))
+    .force("collide", d3.forceCollide(function(d) {
+      return radiusScale(d.value);
+    }));
+
+  var radiusScale = d3.scaleSqrt().domain([1,300]).range([10,100]);
+
+  const svg = d3.select('svg')
+    .classed('container', true);
+
+  var defs = svg.append('defs');
+
+  defs.selectAll('.artist-pattern')
+    .data(DATA)
+    .enter().append('pattern')
+    .attr('class', 'artist-pattern')
+    .attr('id', function(d){
+      return d.id;
+    })
+    .attr('height', '100%')
+    .attr('width', '100%')
+    .attr('patternContentUnits', 'objectBoundingBox')
+    .append('image')
+    .attr('height', 1)
+    .attr('width', 1)
+    .attr('preserveAspectRatio', 'none')
+    .attr('xlink:href', function(d){
+      return d.image.url;
+    });
+
+
+  var circles = svg.selectAll(".bar")
+    .data(DATA)
+    .enter()
+    .append("circle")
+    .attr('r', function(d){
+      return radiusScale(d.value)
+    })
+    .attr('fill', function(d){
+      return "url(#"+ d.id +")";
+    });
+
+  simulation.nodes(DATA)
+    .on('tick', ticked);
+
+  function ticked(){
+    circles
+      .attr('transform', function(d){
+        return "translate(" + d.x + "," + d.y + ")";
+      })
+  }
+}
+main();
