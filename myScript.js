@@ -1,7 +1,7 @@
 //const fetch = require('node-fetch');
 
 //let spotiData = [];
-var tag = "BQC_0EpEcy_I4GRVJv4hhRciO5_eEZ6UdJjJ5g6zvG1FEv7h-psenPCPeDs91RK26ET9pP0ON8g51wxf3vCTuVu7tOXjm3u3OQ4dgpdiMRzRpRgKn75OFs3-AqWmran77eO-QDwmAYU9tFAy09S_wH8HBezop__pMgE";
+var tag = "BQDiM8pu4Z2CPO9QDzBGOx0FHDmeCTmNsnjJaKp0kuIyekFo5UeiRS5I5kMaMvxcfZ5V-JvodArRDD3CXQVonynQOSbDWxYCe7EzSVIonzgcZvU5t1LZfP4EV1zp7InP0TVSVl-hZYHiB6hkEwXYfjXGp_ZVYozQX7U";
 
 async function getUserPlaylists(input){
     const url = input;
