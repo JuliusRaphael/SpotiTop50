@@ -1,7 +1,7 @@
 //const fetch = require('node-fetch');
 
 //let spotiData = [];
-var tag = "BQDBRiaSwTi4gLl55l9y5EmHyqbOnfgEQNCvVqNV73gD1zlXZozhnorgpm1w3XEthQkf9uIQ0iIPQAmSFlg8T4vrwKkfrWa-uON9KYcbCsGXfzL-PI_D3fin-DsrezP_qRkQHs-o7X1bY_kn4xA9wrkN_7oJ0zExFlA";
+var tag = "BQC_0EpEcy_I4GRVJv4hhRciO5_eEZ6UdJjJ5g6zvG1FEv7h-psenPCPeDs91RK26ET9pP0ON8g51wxf3vCTuVu7tOXjm3u3OQ4dgpdiMRzRpRgKn75OFs3-AqWmran77eO-QDwmAYU9tFAy09S_wH8HBezop__pMgE";
 
 async function getUserPlaylists(input){
     const url = input;
@@ -137,7 +137,7 @@ const main = async () => {
 
   //get all user playlists in an array of playlists
   var listsOfPlaylists = [];
-  let temp = await getUserPlaylists("https://api.spotify.com/v1/users/radic1/playlists");
+  let temp = await getUserPlaylists("https://api.spotify.com/v1/users/juliusraphael/playlists");
   listsOfPlaylists.push(...Object.values(temp)[1]);
 
   while(temp['next'] !== null){
