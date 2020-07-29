@@ -14,7 +14,7 @@ async function getTag(){
   url = url + client_id + redirect_uri;
   window.location = url;
 
-  function getHashParams() {
+  async function getHashParams() {
           var hashParams = {};
           var e, r = /([^&;=]+)=?([^&;]*)/g,
               q = window.location.hash.substring(1);
@@ -24,7 +24,7 @@ async function getTag(){
           return hashParams;
         };
 
-    var params = getHashParams();
+    var params = await getHashParams();
 
     var access_token = params.access_token,
           state = params.state,
