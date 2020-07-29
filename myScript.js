@@ -3,7 +3,7 @@
 //let spotiData = [];
 //var tag = "BQAvz-WDLTzD8unRETEqXPezH2omiZXsY83SdUKN_Whjspr9IfmfvnJS0pjH58vkKtcWMs5g5DbbLomyeEazNV_hvVFIqSbdCYHs0-z7bigCEzqN0fs9jeVtZxohMIiqQWts_taPMFRStTbltYBnD6xqty9hHymHvM8";
 
-var tag = await getTag();
+var tag = "";
 
 async function getTag(){
   console.log("i getTag");
@@ -166,7 +166,7 @@ const main = async () => {
   console.log("hej");
 
   //getTag
-  var tag = await getTag();
+  tag = await getTag();
   console.log("hEJ2");
 
   //get all user playlists in an array of playlists
