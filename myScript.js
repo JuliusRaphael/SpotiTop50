@@ -1,13 +1,34 @@
 //const fetch = require('node-fetch');
 
 //let spotiData = [];
-var tag = "BQAvz-WDLTzD8unRETEqXPezH2omiZXsY83SdUKN_Whjspr9IfmfvnJS0pjH58vkKtcWMs5g5DbbLomyeEazNV_hvVFIqSbdCYHs0-z7bigCEzqN0fs9jeVtZxohMIiqQWts_taPMFRStTbltYBnD6xqty9hHymHvM8";
+//var tag = "BQAvz-WDLTzD8unRETEqXPezH2omiZXsY83SdUKN_Whjspr9IfmfvnJS0pjH58vkKtcWMs5g5DbbLomyeEazNV_hvVFIqSbdCYHs0-z7bigCEzqN0fs9jeVtZxohMIiqQWts_taPMFRStTbltYBnD6xqty9hHymHvM8";
 
 async function getTag(){
-  const url = "https://cors-anywhere.herokuapp.com/https://accounts.spotify.com/authorize?client_id=1cb62d180d404900adc7f4b5f5d8ce12&redirect_uri=https://juliusraphael.github.io/SpotiTop50/&scope=user-read-private%20user-read-email&response_type=token&state=123";
-  const result = await fetch(url);
-  console.log(result);
-  return result;
+  console.log("i getTag");
+  var client_id = "client_id=1cb62d180d404900adc7f4b5f5d8ce12"; // Your client id
+  var redirect_uri = "&redirect_uri=https://juliusraphael.github.io/SpotiTop50/&scope=user-read-private%20user-read-email&response_type=token&state=123&show_dialog=true"; // Your redirect uri
+  var scope = 'user-read-private user-read-email';
+  var url = "https://accounts.spotify.com/authorize?"
+  url = url + client_id + redirect_uri;
+  window.location = url;
+
+  function getHashParams() {
+          var hashParams = {};
+          var e, r = /([^&;=]+)=?([^&;]*)/g,
+              q = window.location.hash.substring(1);
+          while ( e = r.exec(q)) {
+             hashParams[e[1]] = decodeURIComponent(e[2]);
+          }
+          return hashParams;
+        };
+
+    var params = getHashParams();
+
+    var access_token = params.access_token,
+          state = params.state,
+          storedState = localStorage.getItem(stateKey);
+  console.log(access_token);
+  return access_token;
 }
 
 async function getUserPlaylists(input){
@@ -143,8 +164,7 @@ const main = async () => {
   console.log("hej");
 
   //getTag
-  var tagg = await getTag();
-
+  var tag = await getTag();
 
   //get all user playlists in an array of playlists
   var listsOfPlaylists = [];
