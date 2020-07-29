@@ -26,9 +26,7 @@ async function getTag(){
 
     var params = await getHashParams();
 
-    var access_token = params.access_token,
-          state = params.state,
-          storedState = localStorage.getItem(stateKey);
+    var access_token = params.access_token;
   console.log(access_token);
   return access_token;
 }
