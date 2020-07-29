@@ -165,6 +165,7 @@ const main = async () => {
 
   //getTag
   var tag = await getTag();
+  console.log("hEJ2");
 
   //get all user playlists in an array of playlists
   var listsOfPlaylists = [];
