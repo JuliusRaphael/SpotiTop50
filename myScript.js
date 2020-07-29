@@ -3,6 +3,10 @@
 //let spotiData = [];
 var tag = "BQAvz-WDLTzD8unRETEqXPezH2omiZXsY83SdUKN_Whjspr9IfmfvnJS0pjH58vkKtcWMs5g5DbbLomyeEazNV_hvVFIqSbdCYHs0-z7bigCEzqN0fs9jeVtZxohMIiqQWts_taPMFRStTbltYBnD6xqty9hHymHvM8";
 
+async function getTag(){
+  window.location = "https://cors-anywhere.herokuapp.com/https://accounts.spotify.com/authorize?client_id=1cb62d180d404900adc7f4b5f5d8ce12&redirect_uri=https://juliusraphael.github.io/SpotiTop50/&scope=user-read-private%20user-read-email&response_type=token&state=123";
+}
+
 async function getUserPlaylists(input){
     const url = input;
     const options = {
@@ -134,6 +138,10 @@ async function getArtist(link) {
 
 const main = async () => {
   console.log("hej");
+
+  //getTag
+  var tagg = await getTag();
+
 
   //get all user playlists in an array of playlists
   var listsOfPlaylists = [];
