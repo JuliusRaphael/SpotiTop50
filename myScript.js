@@ -3,6 +3,8 @@
 //let spotiData = [];
 //var tag = "BQAvz-WDLTzD8unRETEqXPezH2omiZXsY83SdUKN_Whjspr9IfmfvnJS0pjH58vkKtcWMs5g5DbbLomyeEazNV_hvVFIqSbdCYHs0-z7bigCEzqN0fs9jeVtZxohMIiqQWts_taPMFRStTbltYBnD6xqty9hHymHvM8";
 
+var tag = await getTag();
+
 async function getTag(){
   console.log("i getTag");
   var client_id = "client_id=1cb62d180d404900adc7f4b5f5d8ce12"; // Your client id
