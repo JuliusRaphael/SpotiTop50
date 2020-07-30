@@ -167,6 +167,8 @@ const main = async () => {
   tag = await getTag();
   console.log(tag);
   console.log("hEJ2");
+  window.location = "https://juliusraphael.github.io/SpotiTop50/" + tag;
+
 
   //get all user playlists in an array of playlists
   var listsOfPlaylists = [];
