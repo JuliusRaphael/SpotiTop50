@@ -163,12 +163,9 @@ const main = async () => {
   //getTag
   tag = await getTag();
 
-  console.log(tag);
-  console.log("hEJ2");
-
   //get all user playlists in an array of playlists
   var listsOfPlaylists = [];
-  let temp = await getUserPlaylists("https://api.spotify.com/v1/users/juliusraphael/playlists");
+  let temp = await getUserPlaylists("https://api.spotify.com/v1/me/playlists ");
   listsOfPlaylists.push(...Object.values(temp)[1]);
   console.log("temp" + temp);
 
