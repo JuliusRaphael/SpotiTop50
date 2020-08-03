@@ -217,7 +217,7 @@ async function createChart(data){
       return radiusScale(d.value);
     }));
 
-  var radiusScale = d3.scaleSqrt().domain([minDomain,maxDomain]).range([10,100]);
+  var radiusScale = d3.scaleSqrt().domain([minDomain,maxDomain]).range([20,100]);
 
   const svg = d3.select('svg')
     .classed('container', true);
