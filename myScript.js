@@ -12,7 +12,7 @@ async function getTag(){
   var scope = 'user-read-private user-read-email';
   var url = "https://accounts.spotify.com/authorize?"
   url = url + client_id + redirect_uri;
-  window.location = url;
+  window.open = url;
 
   async function getHashParams() {
           var hashParams = {};
@@ -167,7 +167,7 @@ const main = async () => {
   tag = await getTag();
   console.log(tag);
   console.log("hEJ2");
-  window.location = "https://juliusraphael.github.io/SpotiTop50/" + tag;
+  //window.location = "https://juliusraphael.github.io/SpotiTop50/" + tag;
 
 
   //get all user playlists in an array of playlists
