@@ -76,7 +76,10 @@ async function getAllArtists(tracklist){
 
     //get all artists
     if(track['track'] != null){
-      //for all artists
+
+
+      //for all artists of track
+      var trackArtists = track['track']['artists'];
       trackArtists.forEach(function(artist){
 
         //if artist is in hashMap add +1 to key
@@ -90,7 +93,6 @@ async function getAllArtists(tracklist){
 
       })
     }
-    var trackArtists = track['track']['artists'];
   })
 
   return map;
