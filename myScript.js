@@ -75,21 +75,22 @@ async function getAllArtists(tracklist){
   tracklist.forEach(function(track){
 
     //get all artists
+    if(track['track'] != null){
+      //for all artists
+      trackArtists.forEach(function(artist){
+
+        //if artist is in hashMap add +1 to key
+        if(map.has(artist['id'])){
+          map.set(artist['id'], map.get(artist['id'])+1);
+
+        //else add new artists with value 1
+        }else {
+          map.set(artist['id'], 1);
+        }
+
+      })
+    }
     var trackArtists = track['track']['artists'];
-    console.log(track['track']);
-
-    //for all artists
-    trackArtists.forEach(function(artist){
-
-      //if artist is in hashMap add +1 to key
-      if(map.has(artist['id'])){
-        map.set(artist['id'], map.get(artist['id'])+1);
-
-      //else add new artists with value 1
-      }else {
-        map.set(artist['id'], 1);
-      }
-    })
   })
 
   return map;
