@@ -12,7 +12,7 @@ async function getTag(){
   var scope = 'user-read-private user-read-email';
   var url = "https://accounts.spotify.com/authorize?"
   url = url + client_id + redirect_uri;
-  var newWindow = window.open = url;
+  var newWindow = window.open(url);
   console.log("url: " + url);
   console.log("new windoe: " + newWindow.location);
 
