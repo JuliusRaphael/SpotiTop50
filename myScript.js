@@ -14,6 +14,7 @@ async function getTag(){
   url = url + client_id + redirect_uri;
   var newWindow = window.open = url;
   console.log("url: " + url);
+  console.log("new windoe: ": " + newWindow.location);
 
   async function getHashParams() {
           var hashParams = {};
