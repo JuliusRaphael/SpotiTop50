@@ -16,13 +16,21 @@ async function getTag(){
   //console.log("new windoe: " + newWindow.location);
 
   async function getHashParams(url) {
-    let params = (new URL(url)).searchParams;
-    return params.get('access_token')
+          var newWindow = window.open(url);
+          console.log("new windoe: " + newWindow.location);
+          var hashParams = {};
+          var e, r = /([^&;=]+)=?([^&;]*)/g,
+              q = newWindow.location.hash.substring(1);
+          while ( e = r.exec(q)) {
+             hashParams[e[1]] = decodeURIComponent(e[2]);
+          }
+          newWindow.close();
+          return hashParams;
         };
 
-  //var params = await getHashParams(url);
+  var params = await getHashParams(url);
 
-  var access_token = getHashParams(url);
+  var access_token = params.access_token;
   console.log(access_token);
   return access_token;
 }
