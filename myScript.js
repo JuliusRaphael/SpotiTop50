@@ -76,6 +76,7 @@ async function getAllArtists(tracklist){
 
     //get all artists
     var trackArtists = track['track']['artists'];
+    console.log(track['track']);
 
     //for all artists
     trackArtists.forEach(function(artist){
