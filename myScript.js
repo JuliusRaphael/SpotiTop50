@@ -12,11 +12,12 @@ async function getTag(){
   var scope = 'user-read-private user-read-email';
   var url = "https://accounts.spotify.com/authorize?"
   url = url + client_id + redirect_uri;
-  var newWindow = window.open(url);
   console.log("url: " + url);
   console.log("new windoe: " + newWindow.location);
 
-  async function getHashParams() {
+  async function getHashParams(url) {
+          var newWindow = window.open(url);
+          console.log("new windoe: " + newWindow.location);
           var hashParams = {};
           var e, r = /([^&;=]+)=?([^&;]*)/g,
               q = newWindow.location.hash.substring(1);
@@ -26,7 +27,7 @@ async function getTag(){
           return hashParams;
         };
 
-  var params = await getHashParams();
+  var params = await getHashParams(url);
 
   var access_token = params.access_token;
   console.log(access_token);
