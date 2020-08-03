@@ -5,6 +5,8 @@ async function goToAuth(){
   var scope = 'user-read-private user-read-email';
   var url = "https://accounts.spotify.com/authorize?"
   url = url + client_id + redirect_uri;
+
   window.location = url;
+
   console.log("url: " + url);
 }
