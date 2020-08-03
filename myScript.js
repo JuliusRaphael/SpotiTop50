@@ -4,7 +4,6 @@
 //var tag = "BQAvz-WDLTzD8unRETEqXPezH2omiZXsY83SdUKN_Whjspr9IfmfvnJS0pjH58vkKtcWMs5g5DbbLomyeEazNV_hvVFIqSbdCYHs0-z7bigCEzqN0fs9jeVtZxohMIiqQWts_taPMFRStTbltYBnD6xqty9hHymHvM8";
 
 var tag = "";
-var newWindow = "";
 
 async function getTag(){
   console.log("i getTag");
@@ -15,21 +14,18 @@ async function getTag(){
   url = url + client_id + redirect_uri;
   console.log("url: " + url);
   //console.log("new windoe: " + newWindow.location);
-
-  async function getHashParams(url) {
-          newWindow = window.open(url);
-          console.log("new windoe: " + newWindow.location);
+  window.location = url;
+  async function getHashParams() {
           var hashParams = {};
           var e, r = /([^&;=]+)=?([^&;]*)/g,
-              q = newWindow.location.hash.substring(1);
+              q = window.location.hash.substring(1);
           while ( e = r.exec(q)) {
              hashParams[e[1]] = decodeURIComponent(e[2]);
           }
           return hashParams;
         };
 
-  var params = await getHashParams(url);
-  //newWindow.close();
+  var params = await getHashParams();
 
   var access_token = params.access_token;
   console.log(access_token);
@@ -172,7 +168,6 @@ const main = async () => {
   tag = await getTag();
   console.log(tag);
   console.log("hEJ2");
-  newWindow.close();
   //window.location = "https://juliusraphael.github.io/SpotiTop50/" + tag;
 
 
