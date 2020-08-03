@@ -1,10 +1,7 @@
 //const fetch = require('node-fetch');
-
-//let spotiData = [];
-//var tag = "BQAvz-WDLTzD8unRETEqXPezH2omiZXsY83SdUKN_Whjspr9IfmfvnJS0pjH58vkKtcWMs5g5DbbLomyeEazNV_hvVFIqSbdCYHs0-z7bigCEzqN0fs9jeVtZxohMIiqQWts_taPMFRStTbltYBnD6xqty9hHymHvM8";
-
 var tag = "";
 
+//gets tag from redirected URL retunrs as
 async function getTag(){
   async function getHashParams() {
           var hashParams = {};
@@ -17,8 +14,8 @@ async function getTag(){
         };
 
   var params = await getHashParams();
+
   var access_token = params.access_token;
-  console.log(access_token);
   return access_token;
 }
 
@@ -93,7 +90,9 @@ async function getAllArtists(tracklist){
       }
     })
   })
+
   return map;
+
 }
 
 async function createDataFromMap(map){
@@ -111,8 +110,12 @@ async function createDataFromMap(map){
     }
     return 0;
   });
+  if(ret.length > 30 ){
+    return ret.slice(0,30);
+  } else {
+    return ret;
+  }
 
-  return ret.slice(0,30);
 }
 
 async function getNamesAndImages(ids) {
@@ -217,7 +220,7 @@ async function createChart(data){
       return radiusScale(d.value);
     }));
 
-  var radiusScale = d3.scaleSqrt().domain([minDomain,maxDomain]).range([20,100]);
+  var radiusScale = d3.scaleSqrt().domain([minDomain,maxDomain]).range([30,100]);
 
   const svg = d3.select('svg')
     .classed('container', true);
