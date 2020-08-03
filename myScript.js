@@ -158,17 +158,15 @@ async function getArtist(link) {
 
 
 const main = async () => {
-  console.log("hej");
-
-  //getTag
+  //get tag from URL
   tag = await getTag();
 
   //get all user playlists in an array of playlists
   var listsOfPlaylists = [];
-  let temp = await getUserPlaylists("https://api.spotify.com/v1/me/playlists ");
+  let temp = await getUserPlaylists("https://api.spotify.com/v1/me/playlists");
   listsOfPlaylists.push(...Object.values(temp)[1]);
-  console.log("temp" + temp);
 
+  //if
   while(temp['next'] !== null){
     let temp2 = await getUserPlaylists(temp['next']);
     listsOfPlaylists.push(...Object.values(temp2)[1]);
@@ -177,23 +175,17 @@ const main = async () => {
 
   //get all playlist ids in an array
   var playlists = await getPlaylistIdFromUsersPlaylists(listsOfPlaylists);
-  console.log("playlists" + playlists);
 
 
   //for all playlists get all tracks in each playlist
   var tracks = await getAllTracks(playlists);
-  console.log("tracks" + tracks);
-
 
   //get all artitst from tracks and put in hashmap
   var artistsHashmap = await getAllArtists(tracks);
-  console.log("artistsHashmap" + artistsHashmap);
 
   var ids = await createDataFromMap(artistsHashmap);
-  console.log("ids: " + ids);
 
   var data = await getNamesAndImages(ids);
-  console.log("data" + data);
 
   createChart(data);
 
