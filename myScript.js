@@ -26,7 +26,7 @@ async function getTag(){
         };
 
   var params = await getHashParams();
-
+  console.log(access_token);
   var access_token = params.access_token;
   console.log(access_token);
   return access_token;
@@ -165,7 +165,10 @@ const main = async () => {
   console.log("hej");
 
   //getTag
-  tag = await getTag();
+  if(tag === null){
+    tag = await getTag();
+  }
+
   console.log(tag);
   console.log("hEJ2");
   //window.location = "https://juliusraphael.github.io/SpotiTop50/" + tag;
