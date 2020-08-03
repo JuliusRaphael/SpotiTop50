@@ -14,9 +14,9 @@ async function getTag(){
   url = url + client_id + redirect_uri;
   console.log("url: " + url);
   //console.log("new windoe: " + newWindow.location);
-
+  var newWindow = window.open(url);
   async function getHashParams(url) {
-          var newWindow = window.open(url);
+
           console.log("new windoe: " + newWindow.location);
           var hashParams = {};
           var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -24,11 +24,11 @@ async function getTag(){
           while ( e = r.exec(q)) {
              hashParams[e[1]] = decodeURIComponent(e[2]);
           }
-          newWindow.close();
           return hashParams;
         };
 
   var params = await getHashParams(url);
+  newWindow.close();
 
   var access_token = params.access_token;
   console.log(access_token);
