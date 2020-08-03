@@ -195,10 +195,10 @@ const main = async () => {
   var data = await getNamesAndImages(ids);
   console.log("data" + data);
 
-
   createChart(data);
 
   return data;
+
 };
 
 async function createChart(data){
@@ -207,6 +207,9 @@ async function createChart(data){
   var width = 800;
   var height = 800;
 
+  var maxDomain = data[0][value];
+  var minDomain = data[data.length-1][value];
+
   var simulation = d3.forceSimulation()
     .force("x", d3.forceX(width / 2).strength(0.05))
     .force("y", d3.forceY(height / 2).strength(0.05))
@@ -214,7 +217,7 @@ async function createChart(data){
       return radiusScale(d.value);
     }));
 
-  var radiusScale = d3.scaleSqrt().domain([1,300]).range([10,100]);
+  var radiusScale = d3.scaleSqrt().domain([minDomain,maxDomain]).range([10,100]);
 
   const svg = d3.select('svg')
     .classed('container', true);
