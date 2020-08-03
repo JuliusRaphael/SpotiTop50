@@ -16,11 +16,12 @@ async function getTag(){
   //console.log("new windoe: " + newWindow.location);
 
   async function getHashParams(url) {
-          var newWindow = window.open(url);
-          console.log("new windoe: " + newWindow.location);
+          //var newWindow = window.open(url);
+          //console.log("new windoe: " + newWindow.location);
+          window.location = url;
           var hashParams = {};
           var e, r = /([^&;=]+)=?([^&;]*)/g,
-              q = newWindow.location.hash.substring(1);
+              q = window.location.hash.substring(1);
           while ( e = r.exec(q)) {
              hashParams[e[1]] = decodeURIComponent(e[2]);
           }
