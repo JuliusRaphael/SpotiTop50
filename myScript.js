@@ -4,6 +4,7 @@
 //var tag = "BQAvz-WDLTzD8unRETEqXPezH2omiZXsY83SdUKN_Whjspr9IfmfvnJS0pjH58vkKtcWMs5g5DbbLomyeEazNV_hvVFIqSbdCYHs0-z7bigCEzqN0fs9jeVtZxohMIiqQWts_taPMFRStTbltYBnD6xqty9hHymHvM8";
 
 var tag = "";
+var newWindow = "";
 
 async function getTag(){
   console.log("i getTag");
@@ -14,9 +15,9 @@ async function getTag(){
   url = url + client_id + redirect_uri;
   console.log("url: " + url);
   //console.log("new windoe: " + newWindow.location);
-  var newWindow = window.open(url);
-  async function getHashParams(url) {
 
+  async function getHashParams(url) {
+          newWindow = window.open(url);
           console.log("new windoe: " + newWindow.location);
           var hashParams = {};
           var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -28,7 +29,7 @@ async function getTag(){
         };
 
   var params = await getHashParams(url);
-  newWindow.close();
+  //newWindow.close();
 
   var access_token = params.access_token;
   console.log(access_token);
@@ -171,6 +172,7 @@ const main = async () => {
   tag = await getTag();
   console.log(tag);
   console.log("hEJ2");
+  newWindow.close();
   //window.location = "https://juliusraphael.github.io/SpotiTop50/" + tag;
 
 
