@@ -120,7 +120,7 @@ async function getNamesAndImages(ids) {
   await Promise.all(ids.map(async (id) => {
 
       var result = await getArtist("https://api.spotify.com/v1/artists/"+id['id']);
-      if (result.hasOwnProperty("image")) {
+      if (result.hasOwnProperty('image')) {
         temp.push({'id': id['id'], 'name': result['name'], 'value': id['value'], 'image': result['images'][0]});
         console.log(result);
       }
@@ -195,10 +195,10 @@ const main = async () => {
   var data = await getNamesAndImages(ids);
   console.log("data" + data);
 
-
   createChart(data);
 
   return data;
+
 };
 
 async function createChart(data){
