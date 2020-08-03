@@ -112,7 +112,7 @@ async function createDataFromMap(map){
     return 0;
   });
 
-  return ret.slice(0,50);
+  return ret.slice(0,30);
 }
 
 async function getNamesAndImages(ids) {
