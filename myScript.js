@@ -207,8 +207,8 @@ async function createChart(data){
   var width = 800;
   var height = 800;
 
-  var maxDomain = data[0][value];
-  var minDomain = data[data.length-1][value];
+  var maxDomain = data[0]['value'];
+  var minDomain = data[data.length-1]['value'];
 
   var simulation = d3.forceSimulation()
     .force("x", d3.forceX(width / 2).strength(0.05))
