@@ -165,7 +165,7 @@ const main = async () => {
   console.log("hej");
 
   //getTag
-  if(tag === null){
+  if(tag === ""){
     console.log("tag is null");
     tag = await getTag();
   }
