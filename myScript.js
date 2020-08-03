@@ -13,7 +13,7 @@ async function getTag(){
   var url = "https://accounts.spotify.com/authorize?"
   url = url + client_id + redirect_uri;
   console.log("url: " + url);
-  console.log("new windoe: " + newWindow.location);
+  //console.log("new windoe: " + newWindow.location);
 
   async function getHashParams(url) {
           var newWindow = window.open(url);
