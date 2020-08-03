@@ -12,12 +12,12 @@ async function getTag(){
   var scope = 'user-read-private user-read-email';
   var url = "https://accounts.spotify.com/authorize?"
   url = url + client_id + redirect_uri;
-  window.open = url;
+  var newWindow = window.open = url;
 
   async function getHashParams() {
           var hashParams = {};
           var e, r = /([^&;=]+)=?([^&;]*)/g,
-              q = window.location.hash.substring(1);
+              q = newWindow.location.hash.substring(1);
           while ( e = r.exec(q)) {
              hashParams[e[1]] = decodeURIComponent(e[2]);
           }
