@@ -6,7 +6,6 @@
 var tag = "";
 
 async function getTag(){
-  window.location = url;
   async function getHashParams() {
           var hashParams = {};
           var e, r = /([^&;=]+)=?([^&;]*)/g,
