@@ -1,7 +1,7 @@
 //const fetch = require('node-fetch');
 var tag = "";
 
-//gets tag from redirected URL retunrs as
+//gets tag from redirected URL returns token as string
 async function getTag(){
   async function getHashParams() {
           var hashParams = {};
@@ -19,7 +19,8 @@ async function getTag(){
   return access_token;
 }
 
-async function getUserPlaylists(input){
+//fetches data at input endpoint returns as parsed json
+async function fetchData(input){
     const url = input;
     const options = {
       headers: {
@@ -32,6 +33,7 @@ async function getUserPlaylists(input){
       return result;
 }
 
+//extracts all the playlist ids from the
 async function getPlaylistIdFromUsersPlaylists(item) {
   var temp = [];
   item.forEach(async function(it){
@@ -93,9 +95,7 @@ async function getAllArtists(tracklist){
       })
     }
   })
-
   return map;
-
 }
 
 async function createDataFromMap(map){
@@ -104,6 +104,7 @@ async function createDataFromMap(map){
     ret.push({id: id, value: value});
   }
 
+  //Sorts
   ret.sort(function(a,b) {
     if (a['value'] > b['value']) {
       return -1;
@@ -113,6 +114,8 @@ async function createDataFromMap(map){
     }
     return 0;
   });
+
+
   if(ret.length > 30 ){
     return ret.slice(0,30);
   } else {
@@ -166,12 +169,11 @@ const main = async () => {
 
   //get all user playlists in an array of playlists
   var listsOfPlaylists = [];
-  let temp = await getUserPlaylists("https://api.spotify.com/v1/me/playlists");
+  let temp = await fetchData("https://api.spotify.com/v1/me/playlists");
   listsOfPlaylists.push(...Object.values(temp)[1]);
-
-  //if
+  //keeps getting lists while theres is more lists
   while(temp['next'] !== null){
-    let temp2 = await getUserPlaylists(temp['next']);
+    let temp2 = await fetchData(temp['next']);
     listsOfPlaylists.push(...Object.values(temp2)[1]);
     temp = temp2;
   }
